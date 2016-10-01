@@ -9,18 +9,17 @@ class FlagCell extends Component {
   }
 
   render() {
-    const classString = this.props.color;
+    const styles = {backgroundColor: this.props.color};
 
     return (
-      <span className={classString}>cell</span>
+      <span style={styles}>C</span>
     );
   }
 }
 
 
 FlagCell.propTypes = {
-    color: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
+    color: PropTypes.string.isRequired
   };
 
 

@@ -1,50 +1,60 @@
 import React, {Component, PropTypes} from 'react';
 // import './Flag.css';
 import FlagCell from './FlagCell';
-import { v4 } from 'uuid';
 
 // import Pencil from './Pencil'
 
 class Flag extends Component {
   constructor(props) {
     super(props);
+    this.newFlag=this.newFlag.bind(this);
+    this.updateCell=this.updateCell.bind(this);
     this.state = {
       dragging: false,
-      color: this.props.color
+      color: this.props.color,
+      flag: this.props.flag || this.newFlag(this.props.color, this.props.width, this.props.height)
     };
   };
 
-  blankFlag(color, width, height) {
+  newFlag(color, width, height) {
     let flag = [];
 
-    for (let j = 0; j < height; j++) {
+    for (let i = 0; i < height; i++) {
       flag.push([]);
-      for (let i = 0; i < width; i++) {
-        flag[j].push(color);
+      for (let j = 0; j < width; j++) {
+        flag[i].push(color);
       };
     };
-    return (flag)
+    return flag;
   };
-  render() {
-    let renderedFlag = this.props.flag;
-    if (this.props.flag.length < this.props.width) {
-    renderedFlag = this.blankFlag(this.props.color, this.props.width, this.props.height);
-    };
-    return (
-      <div className="flag">"Flag"
-      {renderedFlag.map(function(stripe) {
-        return ( <div className="stripe" key={v4()}>"stripe"
-          {stripe.map(function(color) {
 
-                      return (<FlagCell color={color} key={v4()} />)
+  updateCell(color, i, j) {
+    let flag = this.state.flag;
+    flag[i][j] = color;
+    this.setState ({
+      flag: flag
+    });
+  }
+
+  drawFlag(flag) {
+    const htmlFlag= flag.map(function(stripe, i) {
+        return ( <div className="stripe" key={i}>"stripe"
+          {stripe.map(function(color, j ) {
+                      return (<FlagCell color={color} key={i + " " + j}/>)
                     })}
           </div>)
           })
-      }
-      </div>
-      )
-
+    return htmlFlag
   }
+
+  render() {
+    return (
+      <div className="primary-flag">"Flag"
+        {this.drawFlag(this.state.flag)}
+      </div>      
+    )
+  }
+
 }
 
 Flag.propTypes = {
@@ -57,8 +67,7 @@ Flag.propTypes = {
 Flag.defaultProps = {
     width: 24,
     height: 13,
-    color: 'red',
-    flag: []
+    color: 'grey',
   };
 
 export default Flag;
