@@ -5,6 +5,14 @@ import Flag from './Flag'
 import ColorPicker from './ColorPicker'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      color: "grey"
+  }
+  setColor(){
+    
+  }
   render() {
     return (
       <div className="App">
@@ -15,7 +23,10 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <Flag />
+        <div className="Primary-flag">
+          <Flag />
+        </div>
+        <ColorPicker color={this.state.color}/>
 
       </div>
     );

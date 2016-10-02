@@ -2,13 +2,14 @@ import React, {Component, PropTypes} from 'react';
 // import './Flag.css';
 import FlagCell from './FlagCell';
 
+
 // import Pencil from './Pencil'
 
 class Flag extends Component {
   constructor(props) {
     super(props);
     this.newFlag=this.newFlag.bind(this);
-    this.updateCell=this.updateCell.bind(this);
+    this.updateCell= this.updateCell.bind(this);
     this.state = {
       dragging: false,
       color: this.props.color,
@@ -37,13 +38,22 @@ class Flag extends Component {
   }
 
   drawFlag(flag) {
-    const htmlFlag= flag.map(function(stripe, i) {
-        return ( <div className="stripe" key={i}>"stripe"
-          {stripe.map(function(color, j ) {
-                      return (<FlagCell color={color} key={i + " " + j}/>)
-                    })}
+    const tempContext = this
+    var htmlFlag= flag.map(function(stripe, i) {
+
+        return ( <div className="stripe" key={i}>"tempContext"
+          {stripe.map((color, j ) => {
+                       var handleClick = tempContext.updateCell.bind(tempContext, "blue", i, j);  
+                      return (
+                        <FlagCell 
+                        color={color} 
+                        key={i + " " + j}
+                        id={i + " " + j}
+                        onClick={handleClick}
+                        />
+                    )})}
           </div>)
-          })
+          });
     return htmlFlag
   }
 

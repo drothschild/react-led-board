@@ -1,16 +1,17 @@
-import React, {Component, PropTypes} from 'React'
+import React, {Component, PropTypes} from 'react'
 
 class ColorPicker extends Component {
   constructor(props) {
     // To do: Default Colors
     super(props);
+    this.setColor=this.setColor.bind(this);
     this.state = {
-      color = this.props.color;
+      color: this.props.color
     }
   }
 
   color(){
-    return this.state.color;
+    return "blue";
   };
 
   setColor(event) {
@@ -28,5 +29,10 @@ class ColorPicker extends Component {
   }
 
 };
+
+  ColorPicker.propTypes = {
+    color: PropTypes.string
+    onChange: PropTypes.func
+  };
 
 export default ColorPicker;
