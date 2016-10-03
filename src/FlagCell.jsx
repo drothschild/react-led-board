@@ -11,7 +11,9 @@ class FlagCell extends Component {
     const styles = {backgroundColor: this.props.color};
 
     return (
-      <span style={styles} onClick={this.props.onClick}>C</span>
+      <span style={styles} onMouseDown={this.props.onMouseDown}
+        onMouseOver={this.props.onMouseOver}
+        onMouseUp={this.props.onMouseUp}>C</span>
     );
   }
 }
@@ -20,7 +22,9 @@ class FlagCell extends Component {
 FlagCell.propTypes = {
     color: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
-    onClick: PropTypes.func
+    onMouseDown: PropTypes.func,
+    onMouseOver: PropTypes.func,
+    onMouseUp: PropTypes.func
   };
 
 

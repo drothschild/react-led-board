@@ -6,14 +6,22 @@ import ColorPicker from './ColorPicker'
 
 class App extends Component {
   constructor(props) {
-    super(props);
+        super(props);
+    const defaultColor= "blue"
     this.state = {
-      color: "grey"
-  }
-  setColor(){
-    
-  }
+      color: defaultColor 
+    }
+  };
+
+  updateColor(color) {
+   this.setState ({
+       color: color
+      });
+ };
+
+
   render() {
+    const onChangeColor= this.updateColor.bind(this);
     return (
       <div className="App">
         <div className="App-header">
@@ -24,9 +32,9 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <div className="Primary-flag">
-          <Flag />
+          <Flag color={this.state.color}/>
         </div>
-        <ColorPicker color={this.state.color}/>
+        <ColorPicker color={this.state.color} onChange={onChangeColor}/>
 
       </div>
     );

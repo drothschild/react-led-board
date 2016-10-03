@@ -1,10 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 // import './Flag.css';
 import FlagCell from './FlagCell';
-
-
-// import Pencil from './Pencil'
-
 class Flag extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +9,7 @@ class Flag extends Component {
     this.state = {
       dragging: false,
       color: this.props.color,
-      flag: this.props.flag || this.newFlag(this.props.color, this.props.width, this.props.height)
+      flag: this.props.flag || this.newFlag("grey", this.props.width, this.props.height)
     };
   };
 
@@ -29,27 +25,50 @@ class Flag extends Component {
     return flag;
   };
 
-  updateCell(color, i, j) {
+ onMouseDown(i,j){
+  this.updateCell(i,j);
+  this.setState({
+    dragging:true
+  })
+ } 
+ onMouseOver(i,j){
+    if (this.state.dragging)
+    {
+      this.updateCell(i,j)
+    } 
+   }
+
+  onMouseUp(i,j){
+    this.setState({
+      dragging:false
+    })
+   } 
+
+  updateCell(i, j) {
     let flag = this.state.flag;
-    flag[i][j] = color;
+    flag[i][j] = this.props.color;
     this.setState ({
       flag: flag
     });
   }
 
   drawFlag(flag) {
-    const tempContext = this
-    var htmlFlag= flag.map(function(stripe, i) {
+    const tempContext = this;
+    var htmlFlag = flag.map(function(stripe, i) {
 
-        return ( <div className="stripe" key={i}>"tempContext"
-          {stripe.map((color, j ) => {
-                       var handleClick = tempContext.updateCell.bind(tempContext, "blue", i, j);  
+        return ( <div className="stripe" key={i}>
+          {stripe.map((color, j) => {
+                       const handleDown = tempContext.onMouseDown.bind(tempContext,i, j);
+                       const handleOver = tempContext.onMouseOver.bind(tempContext,i, j);
+                       const handleUp = tempContext.onMouseUp.bind(tempContext,i, j);    
                       return (
                         <FlagCell 
                         color={color} 
                         key={i + " " + j}
                         id={i + " " + j}
-                        onClick={handleClick}
+                        onMouseDown={handleDown}
+                        onMouseOver={handleOver}
+                         onMouseUp={handleUp}
                         />
                     )})}
           </div>)
@@ -71,13 +90,13 @@ Flag.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   color: PropTypes.string,
-  flag: PropTypes.array
+  flag: PropTypes.array,
+  editable: PropTypes.bool
   };
 
 Flag.defaultProps = {
     width: 24,
-    height: 13,
-    color: 'grey',
+    height: 13
   };
 
 export default Flag;

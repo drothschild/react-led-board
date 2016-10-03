@@ -15,7 +15,8 @@ class ColorPicker extends Component {
   };
 
   setColor(event) {
-    this.setState({color: event.target.value});
+    this.setState ({color: event.target.value});
+    this.props.onChange(event.target.value);
   };
 
   render(){
@@ -31,7 +32,7 @@ class ColorPicker extends Component {
 };
 
   ColorPicker.propTypes = {
-    color: PropTypes.string
+    color: PropTypes.string,
     onChange: PropTypes.func
   };
 
