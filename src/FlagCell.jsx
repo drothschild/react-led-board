@@ -11,9 +11,9 @@ class FlagCell extends Component {
     const styles = {backgroundColor: this.props.color};
 
     return (
-      <span style={styles} onMouseDown={this.props.onMouseDown}
+      <div className="cell" style={styles} onMouseDown={this.props.onMouseDown}
         onMouseOver={this.props.onMouseOver}
-        onMouseUp={this.props.onMouseUp}>C</span>
+        onMouseUp={this.props.onMouseUp}></div>
     );
   }
 }

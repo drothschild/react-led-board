@@ -9,7 +9,7 @@ class Flag extends Component {
     this.state = {
       dragging: false,
       color: this.props.color,
-      flag: this.props.flag || this.newFlag("grey", this.props.width, this.props.height)
+      flag: this.props.flag || this.newFlag("white", this.props.width, this.props.height)
     };
   };
 
@@ -54,14 +54,15 @@ class Flag extends Component {
 
   drawFlag(flag) {
     const tempContext = this;
-    var htmlFlag = flag.map(function(stripe, i) {
+    var htmlFlag = flag.map((stripe, i) => {
 
         return ( <div className="stripe" key={i}>
           {stripe.map((color, j) => {
                        const handleDown = tempContext.onMouseDown.bind(tempContext,i, j);
                        const handleOver = tempContext.onMouseOver.bind(tempContext,i, j);
                        const handleUp = tempContext.onMouseUp.bind(tempContext,i, j);    
-                      return (
+                      if (tempContext.props.editable){
+                        return (
                         <FlagCell 
                         color={color} 
                         key={i + " " + j}
@@ -70,7 +71,16 @@ class Flag extends Component {
                         onMouseOver={handleOver}
                          onMouseUp={handleUp}
                         />
-                    )})}
+                    ) }
+                      else {
+                        return (
+                        <FlagCell 
+                        color={color} 
+                        key={i + " " + j}
+                        id={i + " " + j}
+                        />
+                    )}
+                    })}
           </div>)
           });
     return htmlFlag

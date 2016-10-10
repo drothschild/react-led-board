@@ -5,17 +5,9 @@ class ColorPicker extends Component {
     // To do: Default Colors
     super(props);
     this.setColor=this.setColor.bind(this);
-    this.state = {
-      color: this.props.color
-    }
-  }
-
-  color(){
-    return "blue";
   };
 
   setColor(event) {
-    this.setState ({color: event.target.value});
     this.props.onChange(event.target.value);
   };
 
@@ -23,11 +15,11 @@ class ColorPicker extends Component {
     return (
       <input 
         type="text"
-        value={this.state.color}
+        value={this.props.color}
         onChange={this.setColor}
       />
       );
-  }
+  };
 
 };
 
