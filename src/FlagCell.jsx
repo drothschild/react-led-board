@@ -13,7 +13,6 @@ const FlagCell = (props) => {
 
 FlagCell.propTypes = {
     color: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
     onMouseDown: PropTypes.func,
     onMouseOver: PropTypes.func,
     onMouseUp: PropTypes.func

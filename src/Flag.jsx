@@ -66,7 +66,6 @@ class Flag extends Component {
                         <FlagCell 
                         color={color} 
                         key={i + " " + j}
-                        id={i + " " + j}
                         onMouseDown={handleDown}
                         onMouseOver={handleOver}
                          onMouseUp={handleUp}
@@ -77,7 +76,6 @@ class Flag extends Component {
                         <FlagCell 
                         color={color} 
                         key={i + " " + j}
-                        id={i + " " + j}
                         />
                     )}
                     })}
