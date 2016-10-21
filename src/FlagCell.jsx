@@ -1,27 +1,23 @@
-import React, {Component, PropTypes} from 'react';
-
+import React, {PropTypes} from 'react';
 import './FlagCell.css';
 
 
-class FlagCell extends Component {
-  shouldComponentUpdate(nextProps){
-    return !(this.props.color===nextProps.color)
-  }
-
-  render() {
-    const classString = this.props.color;
-
+const FlagCell = (props) => {
     return (
-      <span className={classString}>cell</span>
+      <div className="cell" style={{backgroundColor: props.color}} onMouseDown={props.onMouseDown}
+        onMouseOver={props.onMouseOver}
+        onMouseUp={props.onMouseUp}></div>
     );
-  }
 }
 
 
 FlagCell.propTypes = {
     color: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
+    onMouseDown: PropTypes.func,
+    onMouseOver: PropTypes.func,
+    onMouseUp: PropTypes.func
   };
+
 
 
 export default FlagCell;

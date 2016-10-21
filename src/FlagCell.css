@@ -1,9 +1,9 @@
-.red {
-  background-color: red;
-}
-.white {
-  background-color: white;
-}
-.blue {
-  background-color: blue;
+.cell {
+  padding: 10px;
+  font-size: 10pt;
+  border-width: 1px;
+  border-style: solid;
+  background-color: #23221c;
+  color: #686964;
+  display:inline-block;
 }
